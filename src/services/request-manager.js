@@ -72,7 +72,7 @@ export default class {
    * @returns {AxiosPromise} An ES6 promise.
    */
   deleteData (taskID) {
-    return this._axios.delete(`/data/${taskID}`, {auth: this._getAuth()})
+    return this._axios.delete(`/data/${taskID}`, {data: {auth: this._getAuth()}})
   }
 
   /**
@@ -80,7 +80,7 @@ export default class {
    * @returns {AxiosPromise}
    */
   deleteAllData () {
-    return this._axios.delete('/data', {auth: this._getAuth()})
+    return this._axios.delete('/data', {data: {auth: this._getAuth()}})
   }
 
   /**
