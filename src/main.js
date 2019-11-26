@@ -7,8 +7,8 @@ require('./assets/fonts/Roboto/Roboto.sass')
 require('./assets/fonts/MaterialIcons/MaterialIcons.sass')
 
 class FractalJS {
-  constructor (handler, dataSource, fractalisNode, getAuth, options) {
-    const requestManager = new RequestManager(handler, dataSource, fractalisNode, getAuth)
+  constructor (handler, dataSource, fractalisNode, options) {
+    const requestManager = new RequestManager(handler, dataSource, fractalisNode)
     const chartManager = new ChartManager()
     const stateManager = new StateManager()
     store.dispatch('setRequestManager', requestManager)
@@ -36,10 +36,11 @@ class FractalJS {
   /**
    * Trigger ETL processes for the given list of descriptors to populate the data cache.
    * @param descriptors {[object]}. Descriptors that contain information for the ETLs. (Depends on ETL implementation).
+   * @param getAuth {function}: This MUST be a function that can be called at any time to retrieve credentials to authenticate with
    * @returns {promise}
    */
-  loadData (descriptors) {
-    return store.getters.requestManager.createData(descriptors)
+  loadData (descriptors, getAuth) {
+    return store.getters.requestManager.createData(descriptors, getAuth)
   }
 
   /**
@@ -72,10 +73,11 @@ class FractalJS {
 
   /**
    * Clear data cache.
+   * @param getAuth {function}: This MUST be a function that can be called at any time to retrieve credentials to authenticate with
    * @returns {promise}
    */
-  clearCache () {
-    return store.getters.requestManager.deleteAllData()
+  clearCache (getAuth) {
+    return store.getters.requestManager.deleteAllData(getAuth)
   }
 
   /**
@@ -172,12 +174,11 @@ class FractalJS {
  * @param handler {string}: The service in which this library is used. Example: 'ada', 'tranSMART', 'variantDB'
  * @param dataSource {string}: The base URL of the service in which this library is used. Example: 'https://my.service.org/'
  * @param fractalisNode {string}: The base URL of the fractalis back end that you want to use. 'http://fractalis.uni.lu/'
- * @param getAuth {function}: This MUST be a function that can be called at any time to retrieve credentials to authenticate with
  * @param options {object}: Optional object to configure fractal.js within the target UI.
  * the API of the service specified in dataSource.
  * @returns {FractalJS}: An instance of FractalJS.
  */
-export function init ({handler, dataSource, fractalisNode, getAuth, options}) {
+export function init ({handler, dataSource, fractalisNode, options}) {
   if (!handler) {
     throw new Error(`handler property must not be ${handler}`)
   }
@@ -187,8 +188,5 @@ export function init ({handler, dataSource, fractalisNode, getAuth, options}) {
   if (!fractalisNode) {
     throw new Error(`handler property must not be ${fractalisNode}`)
   }
-  if (!getAuth) {
-    throw new Error(`handler property must not be ${getAuth}`)
-  }
-  return new FractalJS(handler, dataSource, fractalisNode, getAuth, options)
+  return new FractalJS(handler, dataSource, fractalisNode, options)
 }

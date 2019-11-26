@@ -9,10 +9,9 @@ import axios from 'axios'
  * Instead use the provided helpers available as mixins.
  */
 export default class {
-  constructor (handler, dataSource, fractalisNode, getAuth) {
+  constructor (handler, dataSource, fractalisNode) {
     this._handler = handler
     this._dataSource = dataSource
-    this._getAuth = getAuth
 
     this._axios = axios.create({
       baseURL: fractalisNode,
@@ -26,12 +25,13 @@ export default class {
    * The request returns nothing, but sets a session cookie which grants the necessary permission
    * to work with the submitted data.
    * @param descriptors An array of one or more objects that describe the data to be downloaded.
+   * @param getAuth {function}: This MUST be a function that can be called at any time to retrieve credentials to authenticate with
    * @returns {AxiosPromise} An ES6 promise.
    */
-  createData (descriptors) {
+  createData (descriptors, getAuth) {
     return this._axios.post('/data', {
       descriptors,
-      auth: this._getAuth(),
+      auth: getAuth(),
       handler: this._handler,
       server: this._dataSource
     })
@@ -40,13 +40,14 @@ export default class {
   /**
    * A combination of deleteData and createData to simulate reload functionality.
    * @param taskID The data taskID to be reloaded.
+   * @param getAuth {function}: This MUST be a function that can be called at any time to retrieve credentials to authenticate with
    * @returns {AxiosPromise} An ES6 promise.
    */
-  async reloadData (taskID) {
+  async reloadData (taskID, getAuth) {
     const metaData = await this.getMetaData(taskID)
     const descriptors = [metaData.data.meta['descriptor']]
-    await this.deleteData(taskID)
-    return this.createData(descriptors)
+    await this.deleteData(taskID, getAuth)
+    return this.createData(descriptors, getAuth)
   }
 
   /**
@@ -69,18 +70,20 @@ export default class {
   /**
    * Submits a DELETE request that will remove data from the back end if the current session has access to it.
    * @param taskID The id of the data to be removed.
+   * @param getAuth {function}: This MUST be a function that can be called at any time to retrieve credentials to authenticate with
    * @returns {AxiosPromise} An ES6 promise.
    */
-  deleteData (taskID) {
-    return this._axios.delete(`/data/${taskID}`, {data: {auth: this._getAuth()}})
+  deleteData (taskID, getAuth) {
+    return this._axios.delete(`/data/${taskID}`, {data: {auth: getAuth()}})
   }
 
   /**
    * Submits a DELETE requests that will wipe all data from the back end associated with the session.
+   * @param getAuth {function}: This MUST be a function that can be called at any time to retrieve credentials to authenticate with
    * @returns {AxiosPromise}
    */
-  deleteAllData () {
-    return this._axios.delete('/data', {data: {auth: this._getAuth()}})
+  deleteAllData (getAuth) {
+    return this._axios.delete('/data', {data: {auth: getAuth()}})
   }
 
   /**
@@ -138,11 +141,12 @@ export default class {
    * empty because this is an async. operation. The result will be made available via GET
    * request to the same URL.
    * @param stateID The id returned by the POST request to /state.
+   * @param getAuth {function}: This MUST be a function that can be called at any time to retrieve credentials to authenticate with
    * @returns {AxiosPromise} An ES6 promise.
    */
-  requestStateAccess (stateID) {
+  requestStateAccess (stateID, getAuth) {
     return this._axios.post(`/state/${stateID}`, {
-      auth: this._getAuth()
+      auth: getAuth()
     })
   }
 
