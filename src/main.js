@@ -83,16 +83,25 @@ class FractalJS {
    * Example: [caseGroupIds, controlGroupIds]
    * By default all ids are in one group.
    * @param subsets {[[number]]}
+   * @param subsetLabels {[[string]]} Optional list of custom subset labels (otherwise labeled as s{{subset number}})
    */
-  setSubsets (subsets) {
+  setSubsets (subsets, subsetLabels = []) {
     store.dispatch('setSubsets', subsets)
+    if (subsetLabels && Array.isArray(subsetLabels) && subsetLabels.length > 0) {
+      if (subsetLabels.length !== subsets.length) {
+        throw new Error(
+          `Subset labels length (${subsetLabels.length}) does not equal the length of subsets (${subsets.length}).`)
+      }
+      store.dispatch('setSubsetLabels', subsetLabels)
+    }
   }
 
   /**
-   * Undo all previous subset selections. {@link setSubsets}.
+   * Undo all previous subset selections (including subset labels). {@link setSubsets}.
    */
   deleteSubsets () {
     store.dispatch('setSubsets', [])
+    store.dispatch('setSubsetLabels', [])
   }
 
   // FIXME: temporarily disabled. Focus on stabilizing core functionality for now.

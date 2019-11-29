@@ -23,6 +23,31 @@ describe('store', () => {
     })
   })
 
+  describe('setSubsetLabels action', () => {
+    it('should correctly set store values', () => {
+      const subsetLabels = ['subset 1', 'test subset', 'test subset']
+      store.dispatch('setSubsetLabels', subsetLabels)
+      expect(store.getters.subsetLabels).toEqual(subsetLabels)
+    })
+
+    it('should work with empty array', () => {
+      const subsetLabels = []
+      store.dispatch('setSubsetLabels', subsetLabels)
+      expect(store.getters.subsetLabels).toEqual(subsetLabels)
+    })
+
+    it('should fail if invalid labels given', () => {
+      const f = () => store.dispatch('setSubsetLabels', ['', 'test'])
+      const g = () => store.dispatch('setSubsetLabels', [null, 'test'])
+      const h = () => store.dispatch('setSubsetLabels', ['a', '  '])
+      const k = () => store.dispatch('setSubsetLabels', ['a', 2])
+      expect(f).toThrow()
+      expect(g).toThrow()
+      expect(h).toThrow()
+      expect(k).toThrow()
+    })
+  })
+
   describe('setRequestManager action', () => {
     it('should correctly set store values', () => {
       const requestManager = new RequestManager({

@@ -15,6 +15,7 @@ const state = {
     panels: []
   },
   subsets: [],
+  subsetLabels: [],
   filters: {
     ids: {source: null, value: []}
   },

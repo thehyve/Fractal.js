@@ -20,6 +20,9 @@ export default {
   [types.SET_SUBSETS] (state, subsets) {
     state.subsets = subsets
   },
+  [types.SET_SUBSET_LABELS] (state, subsetLabels) {
+    state.subsetLabels = subsetLabels
+  },
   [types.SET_FILTER] (state, {source, filter, value}) {
     Vue.set(state.filters, filter, {source, value})
   },

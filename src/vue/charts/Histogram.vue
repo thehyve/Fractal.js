@@ -140,6 +140,7 @@
           data: [],
           label: '',
           subsets: [],
+          subset_labels: [],
           categories: [],
           stats: {}
         },
@@ -159,6 +160,7 @@
           num_bins: this.params.numBins.value,
           id_filter: this.idFilter.value,
           subsets: store.getters.subsets,
+          subset_labels: store.getters.subsetLabels,
           data: this.params.numVars.value[0],
           categories: this.params.catVars.value
         }
@@ -293,7 +295,7 @@
         this.height = height
       },
       getGroupName (category, subset) {
-        return `${this.results.label} [${category}] [s${subset + 1}]`
+        return `${this.results.label} [${category}] [${this.results.subset_labels[subset]}]`
       },
       updateNumVars (ids) {
         this.params.numVars.validValues = ids

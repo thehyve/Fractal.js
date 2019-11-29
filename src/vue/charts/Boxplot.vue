@@ -259,7 +259,8 @@
           categories: this.params.catVars.value,
           id_filter: this.idFilter.value,
           transformation: this.params.transformation.value,
-          subsets: this.params.ignoreSubsets.value ? [] : store.getters.subsets
+          subsets: this.params.ignoreSubsets.value ? [] : store.getters.subsets,
+          subset_labels: this.params.ignoreSubsets.value ? [] : store.getters.subsetLabels
         }
       },
       pointSize () {

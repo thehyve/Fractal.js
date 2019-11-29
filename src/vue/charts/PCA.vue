@@ -53,7 +53,7 @@
                 <svg :width="pointSize * 2" :height="pointSize * 2">
                   <polygon :points="point"></polygon>
                 </svg>
-                <span>S{{ i + 1 }}</span>
+                <span>{{ subsetLabels[i] }}</span>
               </div>
               <div class="fjs-legend-category" v-for="(color, i) in legendCategoryColors">
                 <div :style="{background: color}"></div>
@@ -174,6 +174,7 @@
             1: [],
             id: [],
             subset: [],
+            subset_label: [],
             category: []
           },
           loadings: {
@@ -209,7 +210,8 @@
           categories: this.params.catVars.value,
           whiten: this.params.whiten.value,
           id_filter: this.idFilter.value,
-          subsets: this.params.ignoreSubsets.value ? [] : store.getters.subsets
+          subsets: this.params.ignoreSubsets.value ? [] : store.getters.subsets,
+          subset_labels: this.params.ignoreSubsets.value ? [] : store.getters.subsetLabels
         }
       },
       validArgs () {
@@ -305,6 +307,9 @@
       },
       subsets () {
         return [...new Set(this.results.data.subset)]
+      },
+      subsetLabels () {
+        return [...new Set(this.results.data.subset_label)]
       },
       categories () {
         return [...new Set(this.results.data.category)]

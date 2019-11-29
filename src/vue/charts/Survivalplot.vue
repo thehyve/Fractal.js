@@ -159,7 +159,8 @@
           event_observed: this.params.observedVars.value,
           estimator: this.params.estimator.value,
           id_filter: store.getters.filter('ids').value,
-          subsets: this.params.ignoreSubsets.value ? [] : store.getters.subsets
+          subsets: this.params.ignoreSubsets.value ? [] : store.getters.subsets,
+          subset_labels: this.params.ignoreSubsets.value ? [] : store.getters.subsetLabels
         }
       },
       validArgs () {
@@ -288,7 +289,7 @@
           .catch(error => console.error(error))
       },
       getGroupName (category, subset) {
-        return `${this.results.label} [${category}] [s${subset + 1}]`
+        return `${this.results.label} [${category}] [${this.results.subset_labels[subset]}]`
       },
       updateDurationVars (ids) {
         this.params.durationVars.validValues = ids

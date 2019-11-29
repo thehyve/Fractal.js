@@ -1,6 +1,7 @@
 export default {
   data: state => state.data,
   subsets: state => state.subsets,
+  subsetLabels: state => state.subsetLabels,
   requestManager: state => state.requestManager,
   chartManager: state => state.chartManager,
   stateManager: state => state.stateManager,
