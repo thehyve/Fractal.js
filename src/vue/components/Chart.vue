@@ -60,8 +60,8 @@
     },
     methods: {
       resize () {
-        const width = this.$el.getBoundingClientRect().width - 1
-        const height = this.$el.getBoundingClientRect().height - 1
+        const width = Math.max(0, this.$el.getBoundingClientRect().width - 1)
+        const height = Math.max(0, this.$el.getBoundingClientRect().height - 1)
         const fontSize = Math.ceil((height < width ? height : width) / 50)
         this.$el.style['font-size'] = fontSize + 'pt'
         this.$emit('resize', width, height)

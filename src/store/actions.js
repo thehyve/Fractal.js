@@ -55,6 +55,19 @@ export default {
     }
   },
   /**
+   * Commits subset labels mutation that will overwrite the old value.
+   * @param context The context of the action.
+   * @param subsetLabels An array of strings defining the custom (optional) subset labels.
+   */
+  setSubsetLabels: (context, subsetLabels) => {
+    if (subsetLabels instanceof Array &&
+      (!subsetLabels.length || subsetLabels.every(d => d && typeof d === 'string' && d.trim().length))) {
+      context.commit(types.SET_SUBSET_LABELS, subsetLabels)
+    } else {
+      throw new Error('The dispatched value must be an Array containing Strings (unless empty).')
+    }
+  },
+  /**
    * This method is triggered once during initialization. Ask in a certain time interval for all available
    * data in the back end to update the views accordingly. Every interval will commit a data mutation to reflect
    * the current back end state.
