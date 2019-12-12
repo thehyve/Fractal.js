@@ -9,7 +9,7 @@ describe('runAnalysis method', () => {
     vm = new Vue({
       mixins: [RunAnalysis]
     })
-    const requestManager = new RequestManager({handler: '', dataSource: '', fractalisNode: '', getAuth: () => {}})
+    const requestManager = new RequestManager({service: '', fractalisNode: '', getAuth: () => {}})
     store.dispatch('setRequestManager', requestManager)
   })
 

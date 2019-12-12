@@ -9,9 +9,8 @@ import axios from 'axios'
  * Instead use the provided helpers available as mixins.
  */
 export default class {
-  constructor (handler, dataSource, fractalisNode, getAuth) {
-    this._handler = handler
-    this._dataSource = dataSource
+  constructor (service, fractalisNode, getAuth) {
+    this._dataService = service
     this._getAuth = getAuth
 
     this._axios = axios.create({
@@ -32,8 +31,7 @@ export default class {
     return this._axios.post('/data', {
       descriptors,
       auth: this._getAuth(),
-      handler: this._handler,
-      server: this._dataSource
+      service: this._dataService
     })
   }
 
@@ -128,8 +126,7 @@ export default class {
   saveState (state) {
     return this._axios.post('/state', {
       state,
-      handler: this._handler,
-      server: this._dataSource
+      service: this._dataService
     })
   }
 

@@ -2,19 +2,13 @@ import { init } from '../src/main'
 
 describe('initializer', () => {
   it('throws if given invalid parameters', () => {
-    let f = () => init({handler: '', dataSource: 'foo', fractalisNode: 'foo', getAuth: () => {}})
+    let f = () => init({service: '', fractalisNode: 'foo', getAuth: () => {}})
     expect(f).toThrow()
-    f = () => init({handler: 'foo', dataSource: '', fractalisNode: 'foo', getAuth: () => {}})
+    f = () => init({service: 'foo', fractalisNode: '', getAuth: () => {}})
     expect(f).toThrow()
-    f = () => init({handler: 'foo', dataSource: 'foo', fractalisNode: '', getAuth: () => {}})
+    f = () => init({service: 'foo', getAuth: () => {}})
     expect(f).toThrow()
-    f = () => init({dataSource: 'foo', fractalisNode: 'foo', getAuth: () => {}})
-    expect(f).toThrow()
-    f = () => init({handler: 'foo', fractalisNode: 'foo', getAuth: () => {}})
-    expect(f).toThrow()
-    f = () => init({handler: 'foo', dataSource: 'foo', getAuth: () => {}})
-    expect(f).toThrow()
-    f = () => init({handler: 'foo', dataSource: 'foo', fractalisNode: 'foo'})
+    f = () => init({service: 'foo', fractalisNode: 'foo'})
     expect(f).toThrow()
   })
 

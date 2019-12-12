@@ -7,8 +7,8 @@ require('./assets/fonts/Roboto/Roboto.sass')
 require('./assets/fonts/MaterialIcons/MaterialIcons.sass')
 
 class FractalJS {
-  constructor (handler, dataSource, fractalisNode, getAuth, options) {
-    const requestManager = new RequestManager(handler, dataSource, fractalisNode, getAuth)
+  constructor (service, fractalisNode, getAuth, options) {
+    const requestManager = new RequestManager(service, fractalisNode, getAuth)
     const chartManager = new ChartManager()
     const stateManager = new StateManager()
     store.dispatch('setRequestManager', requestManager)
@@ -178,26 +178,23 @@ class FractalJS {
 /**
  * Initialize FractalJS and return an instance that contains all basic methods necessary to use this library.
  *
- * @param handler {string}: The service in which this library is used. Example: 'ada', 'tranSMART', 'variantDB'
- * @param dataSource {string}: The base URL of the service in which this library is used. Example: 'https://my.service.org/'
+ * @param service {string}: The name of the service in which this library is used.
+ *                          Links to handlers (example: 'ada', 'tranSMART', 'variantDB') and their urls
  * @param fractalisNode {string}: The base URL of the fractalis back end that you want to use. 'http://fractalis.uni.lu/'
  * @param getAuth {function}: This MUST be a function that can be called at any time to retrieve credentials to authenticate with
  * @param options {object}: Optional object to configure fractal.js within the target UI.
  * the API of the service specified in dataSource.
  * @returns {FractalJS}: An instance of FractalJS.
  */
-export function init ({handler, dataSource, fractalisNode, getAuth, options}) {
-  if (!handler) {
-    throw new Error(`handler property must not be ${handler}`)
-  }
-  if (!dataSource) {
-    throw new Error(`handler property must not be ${dataSource}`)
+export function init ({service, fractalisNode, getAuth, options}) {
+  if (!service) {
+    throw new Error(`'service' property must be specified`)
   }
   if (!fractalisNode) {
-    throw new Error(`handler property must not be ${fractalisNode}`)
+    throw new Error(`'fractalisNode' property must be specified`)
   }
   if (!getAuth) {
-    throw new Error(`handler property must not be ${getAuth}`)
+    throw new Error(`'getAuth' function must be specified`)
   }
-  return new FractalJS(handler, dataSource, fractalisNode, getAuth, options)
+  return new FractalJS(service, fractalisNode, getAuth, options)
 }
