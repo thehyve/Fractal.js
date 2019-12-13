@@ -23,3 +23,13 @@ notifications:
     on_success: change
     on_failure: always
     on_start: never
+
+deploy:
+  provider: npm
+  email: ewelina@thehyve.nl
+  api_key:
+    secure: Fh9lfhZy9tjrvTLUyu4MtP4BFEteB8MtHa7Pkz3oyv64/+MQI92VyKqPcHbS82MGi2o8Htu6PyvriGjUkqDesvs8IFEdX68lxf5qRANYQ4YSKvnc1dgI54ARcb5mgQzfjnIXiYIXU7WZhNKm1iUyJl4YyK8aSmmRv9+O+TcsmmltTzddkuU8eEZm/nCmGH1RedS3B9dqxG3xvWMxk+aM/+anoBJJBAin8UxMGDUWPHMzZ8OzeGQXQqgTKDaOIbtMO3KcJ/zpaGxRufgxKd4nSamtQbdPF3/Ar7T44JAopmtVHWk/OhHi4EG3cZYIfKnk0Y0jHCNe5ykNKOfAWk2cYoqJc8kahh6g++x7U3pQIh6dTuKVKUQTYRZW36sPl+I0xylV9K1HTJ0ThBtgn+01ru0O+arnNGlXY8W5+lEswquOrlDVVQRrLdKaOWQNkUq5IntNm7RKOt4W0aD6RQbKfPzONjcBMhQJv2uMF30G0aMZyprn/3pjjYKwYMpG/tjpJRqrdCsSIUnydBQrbLlgDupFAxph9hpQqzBK1T+ybf2Z/Igm2hRL0i/fbHD6HuDsZ7VFXRjRXOqhamVz1/nGiHRDRtb89oQl75fczBbf+VAJE6YM6KtZxw71ZHWsQnQr/WxRfbfxKX7bT9XJLVO63MNQ3XM865EqBVnFEndvAKw=
+  on:
+    tags: true
+    repo: thehyve/Fractal.js
+    branch: dev
