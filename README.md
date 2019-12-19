@@ -1,4 +1,7 @@
-[![Build Status](https://git-r3lab.uni.lu/sascha.herzinger/fractal.js/badges/master/build.svg)](https://git-r3lab.uni.lu/sascha.herzinger/fractal.js/builds/)
+# Fractal.js
+[![Build Status](https://travis-ci.org/thehyve/Fractal.js.svg?branch=dev)](https://travis-ci.org/thehyve/Fractal.js/branches)
+
+*This repository is used to add improvements and features developed at The Hyve and contribute them to the original [Fractal.js](https://github.com/LCSB-BioCore/Fractal.js) repository.*
 
 ### About
 This is the front-end component of the Fractalis project. It is responsible for the communication with the back-end and the visualisation of analysis results. See https://fractalis.lcsb.uni.lu/
