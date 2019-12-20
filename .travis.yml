@@ -13,7 +13,7 @@ before_install:
   - date
 
 install:
-  - npm install
+  - npm install --dev
   - npm run build
 script:
   - npm run test
