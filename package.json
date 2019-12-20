@@ -19,6 +19,9 @@
     "devserver": "webpack-dev-server --config webpack.config.js --mode development",
     "test": "karma start karma.conf.js"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "lib/fractal-es6-export.js",
   "dependencies": {
     "@babel/runtime": "7.0.0-beta.46",
