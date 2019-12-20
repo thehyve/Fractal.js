@@ -1,16 +1,16 @@
 {
   "name": "@thehyve/fractalis",
-  "description": "The front-end component of the Fractalis visual analytics project.",
+  "description": "The front-end component of the Fractalis visual analytics project - version with improvements and features developed at The Hyve.",
   "version": "1.4.0-hyve",
   "author": "Sascha Herzinger <sascha.herzinger@uni.lu>",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://git-r3lab.uni.lu/Fractalis/fractal.js/issues",
-    "email": "sascha.herzinger@uni.lu"
+    "url": "https://github.com/thehyve/Fractal.js/issues",
+    "email": "ewelina@thehyve.nl"
   },
   "repository": {
     "type": "git",
-    "url": "https://git-r3lab.uni.lu/Fractalis/fractal.js.git"
+    "url": "https://github.com/thehyve/Fractal.js"
   },
   "scripts": {
     "build": "webpack --config webpack.config.js --mode production",
