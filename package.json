@@ -1,7 +1,7 @@
 {
   "name": "@thehyve/fractalis",
   "description": "The front-end component of the Fractalis visual analytics project - version with improvements and features developed at The Hyve.",
-  "version": "1.4.0-hyve",
+  "version": "1.4.1-hyve",
   "author": "Sascha Herzinger <sascha.herzinger@uni.lu>",
   "license": "Apache-2.0",
   "bugs": {
