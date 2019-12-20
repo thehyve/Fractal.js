@@ -1,5 +1,7 @@
 # Fractal.js
 [![Build Status](https://travis-ci.org/thehyve/Fractal.js.svg?branch=dev)](https://travis-ci.org/thehyve/Fractal.js/branches)
+[![npm version](https://img.shields.io/npm/v/@thehyve/fractalis?style=flat-square)](https://www.npmjs.com/package/@thehyve/fractalis)
+
 
 *This repository is used to add improvements and features developed at The Hyve and contribute them to the original [Fractal.js](https://github.com/LCSB-BioCore/Fractal.js) repository.*
 
