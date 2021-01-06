@@ -25,7 +25,7 @@
   "main": "lib/fractal-es6-export.js",
   "dependencies": {
     "@babel/runtime": "7.0.0-beta.46",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "d3": "4.13.0",
     "deep-freeze-strict": "1.1.1",
     "html2canvas": "1.0.0-alpha.12",
